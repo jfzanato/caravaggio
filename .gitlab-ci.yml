@@ -6,7 +6,8 @@ before_script:
 
 dockerhub-test:
   stage: deploy
-  image: gitlab/dind
+  services: 
+    - gitlab/dind
   script:
     - echo $VERSION
     - echo $VERSION_MAJOR_ONLY
