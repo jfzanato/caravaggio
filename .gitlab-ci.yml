@@ -1,13 +1,13 @@
 image: node:8
 
-before_script:
-  - export VERSION=$(node -e "const p = require('./package.json'); console.log(p.version)")
-  - export VERSION_MAJOR_ONLY=2.2
 
 dockerhub-test:
   stage: deploy
-  services: 
-    - gitlab/dind
+  image: gitlab/dind
+  before_script:
+    - apt install nodejs
+    - export VERSION=$(node -e "const p = require('./package.json'); console.log(p.version)")
+    - export VERSION_MAJOR_ONLY=2.2
   script:
     - echo $VERSION
     - echo $VERSION_MAJOR_ONLY
