@@ -1,12 +1,23 @@
 image: node:8
 
-test:
+before_script:
+  - export VERSION=$(node -e "const p = require('./package.json'); console.log(p.version)")
+  - export VERSION_MAJOR_ONLY=2.2
+
+dockerhub-test:
+  stage: deploy
+  image: gitlab/dind
+  script:
+    - echo $VERSION
+    - echo $VERSION_MAJOR_ONLY
+
+.test:
   script:
    - npm i
    - npm run test
   coverage: /All files\s*\|\s*([\d\.]+)/
 
-codequality:
+.codequality:
   image: docker:latest
   variables:
     DOCKER_DRIVER: overlay
@@ -19,7 +30,7 @@ codequality:
   artifacts:
     paths: [codeclimate.json]
 
-npm:
+.npm:
   stage: deploy
   only:
     - tags
@@ -27,7 +38,7 @@ npm:
     - npm config set "//registry.npmjs.org/:_authToken" $NPM_TOKEN
     - npm publish
 
-dockerhub:
+.dockerhub:
   stage: deploy
   image: gitlab/dind
   only:
@@ -44,7 +55,7 @@ dockerhub:
     - docker push ramielcreations/caravaggio:latest
 
 # Gitlab Pages
-pages:
+.pages:
   only:
     - master
   script:
