@@ -11,6 +11,8 @@ dockerhub-test:
   script:
     - echo $VERSION
     - echo $VERSION_MAJOR_ONLY
+    - docker info
+    - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
 
 .test:
   script:
