@@ -9,7 +9,7 @@ test:
         binutils \
         fftw-dev \
         make \
-        g++\
+        g++
    - npm i
    - npm run test
   coverage: /All files\s*\|\s*([\d\.]+)/
