@@ -2,14 +2,7 @@ image: node:8-alpine
 
 test:
   script:
-   - apk add \
-        --update-cache \
-        --repository https://dl-3.alpinelinux.org/alpine/edge/testing/ \
-        vips-dev \
-        binutils \
-        fftw-dev \
-        make \
-        g++
+   - apk add --update-cache --repository https://dl-3.alpinelinux.org/alpine/edge/testing/ vips-dev binutils fftw-dev make g++
    - npm i
    - npm run test
   coverage: /All files\s*\|\s*([\d\.]+)/
