@@ -13,10 +13,6 @@
     "test-watch": "npm run test-only -- --watch",
     "lint": "eslint ."
   },
-  "now": {
-    "public": true,
-    "type": "npm"
-  },
   "repository": "gitlab:ramiel/caravaggio",
   "keywords": [
     "image",

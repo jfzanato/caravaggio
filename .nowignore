@@ -1,0 +1,9 @@
+website/
+test/
+coverage/
+.serverless/
+__mocks__/
+ignoreme.*
+caravaggio
+.gitlab-ci.yml
+node_modules/
