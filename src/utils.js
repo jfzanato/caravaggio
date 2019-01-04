@@ -23,5 +23,46 @@ module.exports = {
   percentageToPixel: (percentage, size) => Math.round(percentage * size),
 
   stringifyParams: params => JSON.stringify(params, jsonReplacer, ''),
+
+  /**
+   * Given a string splitted with a separator, rejoins parts that where among a delimiter
+   * a_"b_c"_d
+   * initially splitted in [a,"b,c",d]
+   * is rejoined as [a, b_c, d]
+   * setting " as block delimiter and _ as separator
+   */
+  rejoinSplittedArray: (BLOCK_DELIMITER = '%22') => {
+    const BLOCKDELIMITERLENGTH = BLOCK_DELIMITER.length;
+    const BLOCK_DELIMITER_REMOVER_REGEXP = new RegExp(`${BLOCK_DELIMITER}`, 'mg');
+
+    return (options, SEP = '_') => options.reduce((acc, opt) => {
+      if (Array.isArray(acc[acc.length - 1])) {
+        let lastOpt = [
+          ...acc.slice(acc.length - 1)[0],
+          opt,
+        ];
+        if (opt.lastIndexOf(BLOCK_DELIMITER) === opt.length - BLOCKDELIMITERLENGTH) {
+          lastOpt = lastOpt.join(SEP).replace(BLOCK_DELIMITER_REMOVER_REGEXP, '');
+        }
+        return [
+          ...acc.slice(0, acc.length - 1),
+          lastOpt,
+        ];
+      }
+
+      if (opt.indexOf(BLOCK_DELIMITER) >= 0) {
+        return [
+          ...acc,
+          [opt.replace(BLOCK_DELIMITER_REMOVER_REGEXP, '')],
+        ];
+      }
+
+
+      return [
+        ...acc,
+        opt,
+      ];
+    }, []);
+  },
 };
 
