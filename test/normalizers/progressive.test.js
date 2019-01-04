@@ -8,15 +8,19 @@ describe('Progressive', () => {
   });
 
   test('progressive throw if the value is not a boolean', () => {
-    expect(() => progressive('hello')).toThrow();
+    expect(() => progressive({ value: 'hello' })).toThrow();
   });
 
   test('progressive does NOT throw if the value is missing', () => {
-    expect(() => progressive()).not.toThrow();
+    expect(() => progressive({})).not.toThrow();
+  });
+
+  test('progressive throws if the value is missing', () => {
+    expect(() => progressive()).toThrow();
   });
 
   test('progressive returns a function as operation', () => {
-    expect(progressive('true')).toEqual(expect.objectContaining({
+    expect(progressive({ value: true })).toEqual(expect.objectContaining({
       output: [
         {
           name: 'progressive',
@@ -28,7 +32,7 @@ describe('Progressive', () => {
   });
 
   describe('Given an output has been specified', () => {
-    const progressiveGenerator = progressive('true').output[0].operation;
+    const progressiveGenerator = progressive({ value: true }).output[0].operation;
 
     test('force to false if progressive is false', async () => {
       const url = new URL('https://image.com/image.jpg');
@@ -43,7 +47,7 @@ describe('Progressive', () => {
         ],
       };
       const pipeline = createPipeline(url, options);
-      const operations = await progressive('false').output[0].operation(pipeline);
+      const operations = await progressive({ value: false }).output[0].operation(pipeline);
       expect(operations).toEqual(expect.arrayContaining([
         expect.objectContaining({
           name: 'progressive',
@@ -158,7 +162,7 @@ describe('Progressive', () => {
   });
 
   describe('Given the output as "original"', () => {
-    const progressiveGenerator = progressive('true').output[0].operation;
+    const progressiveGenerator = progressive({ value: true }).output[0].operation;
 
     test('force to false if progressive is false', async () => {
       const url = new URL('https://image.com/image.jpg');
@@ -167,7 +171,7 @@ describe('Progressive', () => {
         output: [],
       };
       const pipeline = createPipeline(url, options);
-      const operations = await progressive('false').output[0].operation(pipeline);
+      const operations = await progressive({ value: false }).output[0].operation(pipeline);
       expect(operations).toEqual(expect.arrayContaining([
         expect.objectContaining({
           name: 'progressive',
