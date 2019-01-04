@@ -13,19 +13,12 @@ module.exports = (config) => {
 
   return cache => async (req, res) => {
     try {
-      console.log(req.params);
       const params = req.params._.split(PARAM_SPLIT);
       let urlIndex = params.findIndex(isImageUrl);
       urlIndex = urlIndex !== -1 ? urlIndex : params[params.length - 1];
-      const options = params.slice(0, urlIndex);
+      const options = parseOptions(params.slice(0, urlIndex));
       const url = new URL(decodeURIComponent(params.slice(urlIndex).join(PARAM_SPLIT)));
-      console.log({
-        options,
-        url,
-      });
-      const parsedOptions = parseOptions(options);
-      // const options = parseOptions(decodeURIComponent(req.params._[0]));
-      // const url = new URL(decodeURIComponent(req.params._[1]));
+
       const resource = await cache.get(url, options);
       if (resource) {
         logger.debug(`Cache hit for resource ${url.toString()} with options ${options.rawNormalizedOptions}`);

@@ -5,6 +5,7 @@
         "no-nested-ternary": 0,
         "no-multiple-empty-lines": ["error",
             { "max": 2, "maxEOF": 1 }
-        ]
+        ],
+        "prefer-const": ["error", {"destructuring": "all"}]
     }
 }

@@ -26,17 +26,18 @@ module.exports = (config) => {
   };
   const defaultTransformations = config.get('defaultTransformations');
 
-  const findSameNameOperation = name => element => element[0] === name;
+  const findSameNameOperation = name => element => element.name === name;
 
   const addDefaultsTransformations = operations => defaultTransformations
     .reduce(
-      (acc, [name, params]) => {
+      (acc, defaultOp) => {
+        const { name } = defaultOp;
         if (acc.findIndex(findSameNameOperation(name)) !== -1) {
           return acc;
         }
         return [
           ...acc,
-          [name, params],
+          defaultOp,
         ];
       },
       operations,
@@ -44,11 +45,11 @@ module.exports = (config) => {
 
   return (options) => {
     const result = addDefaultsTransformations(options.operations).reduce(
-      (acc, [name, ...params]) => {
+      (acc, { name, ...params }) => {
         if (!normalizers[name]) {
           throw new UnknownOperationError(name);
         }
-        const normalized = normalizers[name](...params);
+        const normalized = normalizers[name]({ ...params });
         return {
           ...acc,
           ...normalized,

@@ -18,6 +18,7 @@ module.exports = (config) => {
       const operations = opts.map((option) => {
         let [opName, ...opParams] = option.split(',');
         opParams = joinOptionsSplittedAmongSeparator(opParams, ',');
+
         if (opParams.length === 0) {
           const [name, value] = opName.split('_');
           return {
@@ -36,13 +37,10 @@ module.exports = (config) => {
           }, {}),
         };
       });
-      console.log(operations);
-      const optsAsArray = opts.split(',');
+
       const options = {
         o: 'original',
-        operations: optsAsArray.map(
-          o => joinOptionsSplittedAmongSeparator(o.split('_')),
-        ),
+        operations,
         rawNormalizedOptions: opts,
       };
       try {

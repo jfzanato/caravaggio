@@ -5,7 +5,7 @@ const getOutputType = async pipeline => (pipeline.getOptions().o !== 'original'
   : (await pipeline.getMetadata()).format);
 
 
-module.exports = (value) => {
+module.exports = ({ value }) => {
   const progressive = cohercer(value, 'Progressive value is not valid.', 'progressive.html')
     .toBool()
     .value();

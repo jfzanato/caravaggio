@@ -136,7 +136,7 @@ module.exports = {
      * a progressive option to have this feature enabled.
      * This is a good default for images which will be served through the browser
      */
-    ['progressive', 'true'],
+    { name: 'progressive', value: true },
   ],
 
   /**
