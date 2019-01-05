@@ -1,3 +1,6 @@
+/**
+ * TODO: tests for this module are missing. Rewrite them
+ */
 const { URL } = require('url');
 const logger = require('../logger');
 const parser = require('../parser');

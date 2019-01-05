@@ -22,19 +22,19 @@ afterAll(() => {
 describe('Image manipulation', () => {
   describe('Quality', () => {
     test('to 100', async () => {
-      const response = await got(`/o_png,q_100/${BASE_IMAGE}`, { baseUrl, encoding: null });
+      const response = await got(`/o_png/q_100/${BASE_IMAGE}`, { baseUrl, encoding: null });
       const image = response.body;
       expect(image).toMatchImageSnapshot();
     });
 
     test('to 50', async () => {
-      const response = await got(`/o_png,q_50/${BASE_IMAGE}`, { baseUrl, encoding: null });
+      const response = await got(`/o_png/q_50/${BASE_IMAGE}`, { baseUrl, encoding: null });
       const image = response.body;
       expect(image).toMatchImageSnapshot();
     });
 
     test('to 10', async () => {
-      const response = await got(`/o_png,q_10/${BASE_IMAGE}`, { baseUrl, encoding: null });
+      const response = await got(`/o_png/q_10/${BASE_IMAGE}`, { baseUrl, encoding: null });
       const image = response.body;
       expect(image).toMatchImageSnapshot();
     });

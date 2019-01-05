@@ -7,7 +7,7 @@ describe('Normalizer', () => {
   test('o is maintained', () => {
     const result = normalizer({
       o: 'original',
-      operations: [['rotate', '90']],
+      operations: [{ name: 'rotate', value: '90' }],
       rawNormalizedOptions: 'rotate_90',
     });
     expect(result).toHaveProperty('o', 'original');
@@ -16,7 +16,7 @@ describe('Normalizer', () => {
   test('rawNormalizedOptions is maintained', () => {
     const result = normalizer({
       o: 'original',
-      operations: [['rotate', '90']],
+      operations: [{ name: 'rotate', value: '90' }],
       rawNormalizedOptions: 'rotate_90',
     });
     expect(result).toHaveProperty('rawNormalizedOptions', 'rotate_90');
@@ -25,7 +25,7 @@ describe('Normalizer', () => {
   test('a transformation goes in the transformations', () => {
     const result = normalizer({
       o: 'original',
-      operations: [['blur', '9']],
+      operations: [{ name: 'blur', value: '9' }],
       rawNormalizedOptions: 'blur_9',
     });
     expect(result).toHaveProperty('transformations');
@@ -34,12 +34,12 @@ describe('Normalizer', () => {
 
   test('a the default operations are added if any', () => {
     config.defaultTransformations = [
-      ['o', 'webp'],
+      { name: 'o', value: 'webp' },
     ];
     const nml = normalizerFactory(config);
     const result = nml({
       o: 'original',
-      operations: [['blur', '9']],
+      operations: [{ name: 'blur', value: '9' }],
       rawNormalizedOptions: 'blur_9',
     });
     expect(result.output).toHaveLength(1);
@@ -47,12 +47,12 @@ describe('Normalizer', () => {
 
   test('a the default operations is overwritten by one set by the user', () => {
     config.defaultTransformations = [
-      ['o', 'webp'],
+      { name: 'o', vaule: 'webp' },
     ];
     const nml = normalizerFactory(config);
     const result = nml({
       o: 'png',
-      operations: [['o', 'jpg']],
+      operations: [{ name: 'o', value: 'jpg' }],
       rawNormalizedOptions: 'o_png',
     });
     expect(result.output).toHaveLength(1);

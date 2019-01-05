@@ -2,7 +2,7 @@ const rotate = require('../../src/normalizers/rotate');
 
 describe('Rotate', () => {
   test('Accept multiple of 90°', () => {
-    expect(rotate('180')).toEqual(expect.objectContaining({
+    expect(rotate({ value: '180' })).toEqual(expect.objectContaining({
       transformations: [
         {
           name: 'rotate',
@@ -14,7 +14,7 @@ describe('Rotate', () => {
   });
 
   test('Accept negative multiple of 90°', () => {
-    expect(rotate('-180')).toEqual(expect.objectContaining({
+    expect(rotate({ value: '-180' })).toEqual(expect.objectContaining({
       transformations: [
         {
           name: 'rotate',
@@ -26,7 +26,7 @@ describe('Rotate', () => {
   });
 
   test('Accept multiple of 90° beyond 360°', () => {
-    expect(rotate('450')).toEqual(expect.objectContaining({
+    expect(rotate({ value: '450' })).toEqual(expect.objectContaining({
       transformations: [
         {
           name: 'rotate',
@@ -38,7 +38,7 @@ describe('Rotate', () => {
   });
 
   test('Accept a custom angle', () => {
-    expect(rotate('42')).toEqual(expect.objectContaining({
+    expect(rotate({ value: '42' })).toEqual(expect.objectContaining({
       transformations: [
         {
           name: 'rotate',
@@ -50,7 +50,7 @@ describe('Rotate', () => {
   });
 
   test('Accept a background color', () => {
-    expect(rotate('42', 'ff00ff')).toEqual(expect.objectContaining({
+    expect(rotate({ value: '42', b: 'ff00ff' })).toEqual(expect.objectContaining({
       transformations: [
         {
           name: 'rotate',
@@ -66,7 +66,7 @@ describe('Rotate', () => {
   });
 
   test('Accept a background color with alpha', () => {
-    expect(rotate('42', 'ff00ff.9')).toEqual(expect.objectContaining({
+    expect(rotate({ value: '42', b: 'ff00ff.9' })).toEqual(expect.objectContaining({
       transformations: [
         {
           name: 'rotate',

@@ -2,16 +2,16 @@ const o = require('../../src/normalizers/o');
 
 describe('Output', () => {
   test('original does not add an operation', () => {
-    const result = o('original');
+    const result = o({ value: 'original' });
     expect(result).not.toHaveProperty('output');
   });
 
   test('throws if the format is not supported', () => {
-    expect(() => o('exotic')).toThrow();
+    expect(() => o({ value: 'exotic' })).toThrow();
   });
 
   test('"jpg" is handled', () => {
-    const result = o('jpg');
+    const result = o({ value: 'jpg' });
     expect(result).toEqual(expect.objectContaining({
       o: 'jpg',
       output: [
@@ -25,7 +25,7 @@ describe('Output', () => {
   });
 
   test('"jpeg" is handled', () => {
-    const result = o('jpeg');
+    const result = o({ value: 'jpeg' });
     expect(result).toEqual(expect.objectContaining({
       o: 'jpeg',
       output: [
@@ -39,7 +39,7 @@ describe('Output', () => {
   });
 
   test('"png" is handled', () => {
-    const result = o('png');
+    const result = o({ value: 'png' });
     expect(result).toEqual(expect.objectContaining({
       o: 'png',
       output: [
@@ -53,7 +53,7 @@ describe('Output', () => {
   });
 
   test('"webp" is handled', () => {
-    const result = o('webp');
+    const result = o({ value: 'webp' });
     expect(result).toEqual(expect.objectContaining({
       o: 'webp',
       output: [
@@ -67,7 +67,7 @@ describe('Output', () => {
   });
 
   test('"tiff" is handled', () => {
-    const result = o('tiff');
+    const result = o({ value: 'tiff' });
     expect(result).toEqual(expect.objectContaining({
       o: 'tiff',
       output: [

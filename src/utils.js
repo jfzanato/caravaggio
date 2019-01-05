@@ -25,6 +25,14 @@ module.exports = {
   stringifyParams: params => JSON.stringify(params, jsonReplacer, ''),
 
   /**
+   * Trim an arbitrary set of charachters from a string
+   */
+  trim: (ch) => {
+    const regexp = new RegExp(`^${ch}+|${ch}+$`, 'g');
+    return str => str.replace(regexp, '');
+  },
+
+  /**
    * Given a string splitted with a separator, rejoins parts that where among a delimiter
    * a_"b_c"_d
    * initially splitted in [a,"b,c",d]
@@ -49,11 +57,14 @@ module.exports = {
           lastOpt,
         ];
       }
-
-      if (opt.indexOf(BLOCK_DELIMITER) >= 0) {
+      const firstIndex = opt.indexOf(BLOCK_DELIMITER);
+      if (firstIndex >= 0) {
+        const ret = firstIndex !== opt.lastIndexOf(BLOCK_DELIMITER)
+          ? opt.replace(BLOCK_DELIMITER_REMOVER_REGEXP, '')
+          : [opt.replace(BLOCK_DELIMITER_REMOVER_REGEXP, '')];
         return [
           ...acc,
-          [opt.replace(BLOCK_DELIMITER_REMOVER_REGEXP, '')],
+          ret,
         ];
       }
 

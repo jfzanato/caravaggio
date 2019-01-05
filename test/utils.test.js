@@ -53,6 +53,11 @@ describe('utils', () => {
         const string = 'a:1_u:%22_c%22_d:true';
         expect(rejoin(string.split('_'))).toEqual(['a:1', 'u:_c', 'd:true']);
       });
+
+      test('work with multiple block delimiters', () => {
+        const string = 'a:1_u:%22c%22_d:%22true%22';
+        expect(rejoin(string.split('_'))).toEqual(['a:1', 'u:c', 'd:true']);
+      });
     });
   });
 });

@@ -1,13 +1,16 @@
 const normalizerFactory = require('./normalizers');
-const { rejoinSplittedArray } = require('./utils');
+const { rejoinSplittedArray, trim } = require('./utils');
 
+
+const BOUNDARY_DELIMITER = '%22';
+const trimBoundary = trim(BOUNDARY_DELIMITER);
 
 /**
  * If the option is in the format a_b_"c_d" it must be splitted in "a", "b, "c_d"
  * This function takes care of joining all the parameter splitted by a dumb split
  * @param {Array} options
  */
-const joinOptionsSplittedAmongSeparator = rejoinSplittedArray('%22');
+const joinOptionsSplittedAmongSeparator = rejoinSplittedArray(BOUNDARY_DELIMITER);
 
 
 module.exports = (config) => {
@@ -20,19 +23,23 @@ module.exports = (config) => {
         opParams = joinOptionsSplittedAmongSeparator(opParams, ',');
 
         if (opParams.length === 0) {
-          const [name, value] = opName.split('_');
+          const [name, ...value] = opName.split('_');
           return {
             name,
-            value,
+            value: trimBoundary(value.join('_')),
           };
         }
         return {
           name: opName,
           ...opParams.reduce((acc, param) => {
-            const [key, value] = param.split('_');
+            let [key, ...value] = param.split('_');
+            if (value.length === 0) {
+              value = key;
+              key = 'value';
+            }
             return {
               ...acc,
-              [key]: value,
+              [key]: trimBoundary(value.join('_')),
             };
           }, {}),
         };

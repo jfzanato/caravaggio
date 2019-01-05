@@ -1,8 +1,8 @@
 const cohercer = require('../cohercer');
 const { getColorFromParameter } = require('./resize/color');
 
-module.exports = (value, rawColor) => {
-  const angle = cohercer(value, 'Angle must be a number', 'rotate.html')
+module.exports = ({ value, v, b: rawColor }) => {
+  const angle = cohercer(v || value, 'Angle must be a number', 'rotate.html')
     .toInt()
     .value();
 

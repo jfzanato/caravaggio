@@ -1,6 +1,6 @@
 const cohercer = require('../cohercer');
 
-module.exports = (value) => {
+module.exports = ({ value }) => {
   const operation = value && cohercer(value, 'Flip accepts "x" or "y" as values.', 'flip.html')
     .toString()
     .enum(['x', 'y'])

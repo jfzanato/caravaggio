@@ -22,31 +22,31 @@ afterAll(() => {
 describe('Image manipulation', () => {
   describe('Rotate', () => {
     test('rotate 90', async () => {
-      const response = await got(`/rotate_90,o_png,q_90/${BASE_IMAGE}`, { baseUrl, encoding: null });
+      const response = await got(`/rotate,v_90/o_png/q_90/${BASE_IMAGE}`, { baseUrl, encoding: null });
       const image = response.body;
       expect(image).toMatchImageSnapshot();
     });
 
     test('rotate 450', async () => {
-      const response = await got(`/rotate_450,o_png,q_90/${BASE_IMAGE}`, { baseUrl, encoding: null });
+      const response = await got(`/rotate,v_450/o_png/q_90/${BASE_IMAGE}`, { baseUrl, encoding: null });
       const image = response.body;
       expect(image).toMatchImageSnapshot();
     });
 
     test('rotate 12', async () => {
-      const response = await got(`/rotate_12,o_png,q_90/${BASE_IMAGE}`, { baseUrl, encoding: null });
+      const response = await got(`/rotate,v_12/o_png/q_90/${BASE_IMAGE}`, { baseUrl, encoding: null });
       const image = response.body;
       expect(image).toMatchImageSnapshot();
     });
 
     test('rotate 12 with background color', async () => {
-      const response = await got(`/rotate_12_ff00ff,o_png,q_90/${BASE_IMAGE}`, { baseUrl, encoding: null });
+      const response = await got(`/rotate,v_12,b_ff00ff/o_png/q_90/${BASE_IMAGE}`, { baseUrl, encoding: null });
       const image = response.body;
       expect(image).toMatchImageSnapshot();
     });
 
     test('rotate 12 with background color and alpha', async () => {
-      const response = await got(`/rotate_12_ff00ff.5,o_png,q_90/${BASE_IMAGE}`, { baseUrl, encoding: null });
+      const response = await got(`/rotate,v_12,b_ff00ff.5/o_png/q_90/${BASE_IMAGE}`, { baseUrl, encoding: null });
       const image = response.body;
       expect(image).toMatchImageSnapshot();
     });
