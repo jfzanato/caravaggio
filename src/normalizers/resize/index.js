@@ -52,7 +52,7 @@ const getWidthAndHeight = async (sizes, pipeline) => {
  *
  * @param {String} value Value in the format
  */
-module.exports = (size, mode = 'scale', ...modeParams) => {
+module.exports = ({ s: size, m: mode = 'scale', ...modeParams }) => {
   /* eslint-disable no-param-reassign */
   size = cohercer(size, 'Resize: the size parameter is in the wrong format.', 'resize.html#sizes')
     .toString()
@@ -71,7 +71,7 @@ module.exports = (size, mode = 'scale', ...modeParams) => {
         name: 'resize',
         operation: async (pipeline) => {
           const [width, height] = await getWidthAndHeight(size, pipeline);
-          return MODES[mode](pipeline)(width, height, ...modeParams);
+          return MODES[mode](pipeline)({ width, height, ...modeParams });
         },
       },
     ],

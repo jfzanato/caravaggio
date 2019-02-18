@@ -1,6 +1,6 @@
-module.exports = (/* pipeline */) => async (width, height, modeParams) => {
+module.exports = (/* pipeline */) => async ({ width, height, iar = false }) => {
   const params = [width, height];
-  if (modeParams === 'iar') {
+  if (iar) {
     params.push({ fit: 'fill' });
   }
   const operations = [

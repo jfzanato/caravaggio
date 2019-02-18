@@ -7,39 +7,39 @@ describe('Resize', () => {
   const getResize = async (...params) => resize(...params).transformations[0].operation(pipeline);
 
   test('mode must be available', async () => {
-    expect(getResize('200x300', 'fantasycrop')).rejects.toBeDefined();
+    expect(getResize({ s: '200x300', m: 'fantasycrop' })).rejects.toBeDefined();
   });
 
   test('mode scale is available', async () => {
-    await expect(getResize('200x300', 'scale')).resolves.toBeDefined();
+    await expect(getResize({ s: '200x300', m: 'scale' })).resolves.toBeDefined();
   });
 
   test('mode fit is available', async () => {
-    await expect(getResize('200x300', 'fit')).resolves.toBeDefined();
+    await expect(getResize({ s: '200x300', m: 'fit' })).resolves.toBeDefined();
   });
 
   test('mode downfit is available', async () => {
-    await expect(getResize('200x300', 'downfit')).resolves.toBeDefined();
+    await expect(getResize({ s: '200x300', m: 'downfit' })).resolves.toBeDefined();
   });
 
   test('mode upfit is available', async () => {
-    await expect(getResize('200x300', 'upfit')).resolves.toBeDefined();
+    await expect(getResize({ s: '200x300', m: 'upfit' })).resolves.toBeDefined();
   });
 
   test('mode fill is available', async () => {
-    await expect(getResize('200x300', 'fill')).resolves.toBeDefined();
+    await expect(getResize({ s: '200x300', m: 'fill' })).resolves.toBeDefined();
   });
 
   test('mode downfill is available', async () => {
-    await expect(getResize('200x300', 'downfill')).resolves.toBeDefined();
+    await expect(getResize({ s: '200x300', m: 'downfill' })).resolves.toBeDefined();
   });
 
   test('mode embed is available', async () => {
-    await expect(getResize('200x300', 'embed')).resolves.toBeDefined();
+    await expect(getResize({ s: '200x300', m: 'embed' })).resolves.toBeDefined();
   });
 
   test('width and heigth can be passed', async () => {
-    const result = await getResize('200x300');
+    const result = await getResize({ s: '200x300' });
     expect(result).toEqual([{
       name: 'resize',
       operation: 'resize',
@@ -48,7 +48,7 @@ describe('Resize', () => {
   });
 
   test('only width can be passed', async () => {
-    const result = await getResize('200x');
+    const result = await getResize({ s: '200x' });
     expect(result).toEqual([{
       name: 'resize',
       operation: 'resize',
@@ -57,7 +57,7 @@ describe('Resize', () => {
   });
 
   test('only width can be passed and the aspect ratio can be ignored', async () => {
-    const result = await getResize('200x', 'scale', 'iar');
+    const result = await getResize({ s: '200x', m: 'scale', iar: true });
     expect(result).toEqual([{
       name: 'resize',
       operation: 'resize',
@@ -66,7 +66,7 @@ describe('Resize', () => {
   });
 
   test('only height can be passed', async () => {
-    const result = await getResize('x300');
+    const result = await getResize({ s: 'x300' });
     expect(result).toEqual([{
       name: 'resize',
       operation: 'resize',
