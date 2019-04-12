@@ -32,6 +32,7 @@
   },
   "homepage": "https://ramiel.gitlab.io/caravaggio/",
   "dependencies": {
+    "@sentry/node": "^4.6.6",
     "config": "2.0.1",
     "fs-extra": "7.0.0",
     "md5": "^2.2.1",

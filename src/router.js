@@ -8,6 +8,7 @@ const { compose } = require('./utils');
 
 module.exports = config => ({ whitelist }) => router(
   get('/favicon.ico', favicon),
+  get('/test', () => { console.log(pippo.niente); }),
   get(
     '/*/*',
     compose(
