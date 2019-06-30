@@ -2,24 +2,19 @@
   "name": "caravaggio",
   "version": 2,
   "public": true,
-  "env": {
-    "NODE_CONFIG_DIR": "/var/task/user/config"
-  },
   "builds": [
     {
-      "src": "index.js",
+      "src": "now.js",
       "use": "@now/node-server",
       "config": {
         "maxLambdaSize": "50mb"
       }
-    },
+    }
+  ],
+  "routes": [
     {
-      "src": "config/**",
-      "use": "@now/static"
-    },
-    {
-      "src": "static/**",
-      "use": "@now/static"
+      "src": "/.*",
+      "dest": "/now.js"
     }
   ]
 }

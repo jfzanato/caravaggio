@@ -6,4 +6,4 @@ __mocks__/
 ignoreme.*
 caravaggio
 .gitlab-ci.yml
-node_modules/
+node_modules
