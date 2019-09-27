@@ -14,7 +14,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/now.js"
+      "dest": "now.js"
     }
   ]
 }
