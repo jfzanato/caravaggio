@@ -1,7 +1,6 @@
 const merge = require('lodash/merge');
 const config = require('./src/config');
 const caravaggio = require('./index');
-const { createLogger } = require('./src/logger');
 
 const nowConfig = {
   caches: {
@@ -10,7 +9,7 @@ const nowConfig = {
       limit: 1024,
     },
     errors: 'html',
-    whitelist: ['ramiel.gitlab.io', 'cvg-res.now.sh'],
+    whitelist: ['ramiel.gitlab.io', 'cvg-res.now.sh', 'caravaggio.ramielcreations.com'],
     logger: {
       level: 'debug',
       pretty: false,
@@ -18,7 +17,5 @@ const nowConfig = {
   },
 };
 const configuration = merge(config, nowConfig);
-
-createLogger(configuration);
 
 module.exports = caravaggio(configuration);
