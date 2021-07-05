@@ -2,9 +2,10 @@ import { PluginConstructor } from '../pluginLoader/pluginLoader';
 import CError from '../errors/CError';
 
 const buildRegex = (domains: Array<string>) =>
-  domains &&
-  domains.map(
+  domains?.map(
     (domain) =>
+      // NOTE: this is safe enough because `domain` comes from trusted user
+      // eslint-disable-next-line security/detect-non-literal-regexp
       new RegExp(`^${domain.replace(/\./g, '\\.').replace(/\*/g, '.*')}`)
   );
 

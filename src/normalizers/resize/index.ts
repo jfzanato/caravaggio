@@ -38,6 +38,7 @@ const MODES: {
 
 const AVAILABLE_MODES = Object.keys(MODES);
 
+// eslint-disable-next-line security/detect-unsafe-regex
 const RESIZE_PATTERN = /^(\d+(.\d+)?x\d+(.\d+)?|\d+(.\d+)?x?|x\d+(.\d+)?)$/;
 
 export interface ResizeRawOp extends RawOperation {

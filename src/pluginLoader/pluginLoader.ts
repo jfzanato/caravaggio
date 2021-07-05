@@ -59,7 +59,7 @@ const pluginLoader = (config: Config, logger?: Logger): PluginManager => {
         if (instance) {
           plugin = instance;
         } else {
-          // eslint-disable-next-line @typescript-eslint/no-var-requires
+          // eslint-disable-next-line @typescript-eslint/no-var-requires,security/detect-non-literal-require
           const loaded = require(require.resolve(name, {
             paths,
           }));

@@ -9,6 +9,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
     'plugin:jest/recommended',
+    'plugin:security/recommended',
   ],
   globals: {
     Atomics: 'readonly',
@@ -19,9 +20,10 @@ module.exports = {
     ecmaVersion: 11,
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'security'],
   rules: {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'security/detect-object-injection': 'off',
   },
   overrides: [
     {

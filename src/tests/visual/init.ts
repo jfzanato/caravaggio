@@ -20,6 +20,7 @@ const cache = new Map();
     if (cache.has(relativePath)) {
       data = cache.get(relativePath);
     } else {
+      // eslint-disable-next-line security/detect-non-literal-fs-filename
       data = await fs.readFile(
         path.join(__dirname, '..', 'fixtures', 'test-images', relativePath)
       );

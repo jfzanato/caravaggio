@@ -26,6 +26,7 @@ const filePersistor: (opt: FileCacheOptions) => Persistor = (
         .catch(() => false),
 
     read: (filename) =>
+      // eslint-disable-next-line security/detect-non-literal-fs-filename
       fs
         .readFile(getCompleteFilename(filename))
         .then(

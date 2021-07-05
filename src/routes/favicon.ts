@@ -6,6 +6,7 @@ let favicon: Buffer | null = null;
 
 const getFavicon = async () => {
   if (!favicon) {
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
     favicon = await fs.readFile(
       path.resolve(__dirname, '..', '..', 'static', 'favicon.ico')
     );

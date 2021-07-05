@@ -19,6 +19,7 @@ const indexRoute = (context: Context) => {
   const cache = cacheFactory(config.caches?.output || defaultOutputCacheConfig);
   const sender = senderCreator(config);
   const pipeline = pipelineCreator(context);
+  // eslint-disable-next-line security/detect-non-literal-regexp
   const basePathRegexp = new RegExp(`^${config.basePath}`);
   const basePathReplacer = (url: string) =>
     config.basePath ? url.replace(basePathRegexp, '') : url;
